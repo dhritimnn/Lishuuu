@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lishuu <3</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+    	@keyframes fadeDown {
+    		from { opacity: 0; transform: translateY(-12px); }
+    		to { opacity: 1; transform: translateY(0); }
+    	}
+    	@keyframes fadeUp {
+    		from { opacity: 0; transform: translateY(16px); }
+    		to { opacity: 1; transform: translateY(0); }
+    	}
+    	@keyframes glow {
+    		0%, 100% { background-position: 0% 50%; }
+    		50% { background-position: 100% 50%; }
+    	}
+    	@keyframes pulseSoft {
+    		0%, 100% { opacity: 1; }
+    		50% { opacity: .55; }
+    	}
+    	@keyframes slideUpIn {
+    		from { opacity: 0; transform: translateY(18px); filter: blur(3px); }
+    		to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    	}
+    	@keyframes fadeOutUp {
+    		from { opacity: 1; transform: translateY(0); }
+    		to { opacity: 0; transform: translateY(-14px); }
+    	}
+
+
+
+    	nav {
+    		animation: fadeDown .7s ease both;
+    	}
+
+    	nav h2 {
+    		display: inline-block;
+    		transition: transform .25s ease, letter-spacing .25s ease, opacity .25s ease;
+    		cursor: pointer;
+    	}
+    	nav h2:hover {
+    		transform: translateX(-4px);
+    		letter-spacing: .28rem;
+    		opacity: .85;
+    	}
+
+    	nav p {
+    		animation: pulseSoft 2.6s ease-in-out infinite;
+    	}
+
+    	#first, #second {
+    		will-change: transform, opacity, filter;
+    	}
+
+    	#first.leaving, #second.leaving {
+    		animation: fadeOutUp 150ms ease both;
+    	}
+    	#first.entering, #second.entering {
+    		animation: slideUpIn 380ms cubic-bezier(.22,1,.36,1) both;
+    	}
+    	#second.entering {
+    		animation-delay: 0ms;
+    	}
+
+    	.tap-zone {
+    		transition: background-color .15s ease;
+    	}
+    	.tap-zone:active {
+    		background-color: rgba(255,255,255,0.01);
+    	}
+
+    	section {
+    		animation: fadeUp .8s ease .1s both;
+    	}
+    </style>
+</head>
+<body class="bg-[#18030e] text-white flex flex-col">
+	<nav class="z-1299 flex fixed top-0 left-0 right-0 justify-between flex-row px-7 py-4 text-sm font-lightbold tracking-[.2rem]">
+		<a href="..">< go back</a>
+		<p>~</p>
+	</nav>
+	<section class="font-[sans] h-[90dvh] p-6 flex justify-center items-center flex-col gap-[2rem] text-center">
+	<div class="z-999 fixed inset-0"><button onclick="backwards()" class="tap-zone text-white h-screen w-[50%]"></button><button onclick="forwards()" class="tap-zone text-white h-screen w-[50%]"></button></div>
+		<p class="text-[0.8rem] tracking-[.1rem] font-bold text-[#969696]" id="first"></p>
+		<p class="text-[1.2rem] tracking-[.2rem] font-bold" id="second"></p>
+	</section>
+	<script>
+	 	var songs = {
+
+	 	a: [
+		"#542c1a",
+	"#2a1808",
+	"",
+	"Line Without A Hook",
+	"<3",
+	"I don't really give a damn about the way you touch me",
+	"When we're alone",
+	"You can hold my hand",
+	"If no one's home",
+	"Do you like it when I'm away?",
+	"If I went and hurt my body, baby",
+	"Would you love me the same?",
+	"I can feel all my bones coming back",
+	"And I'm craving motion",
+	"Mama never really learned how to live by herself",
+	"It's a curse",
+	"And it's growing",
+	"You're a pond and I'm an ocean",
+	"Oh, all my emotions",
+	"Feel like explosions when you are around",
+	"And I've found a way to kill the sounds, oh",
+	"Oh, baby, I am a wreck when I'm without you",
+	"I need you here to stay",
+	"I broke all my bones that day I found you",
+	"Crying at the lake",
+	"Was it something I said to make you feel like you're a burden?",
+	"Oh, and if I could take it all back",
+	"I swear that I would pull you from the tide",
+	"Oh, whoa, whoa, whoa",
+	"I said no, I said no",
+	"Listen close, it's a no",
+	"The wind is a-pounding on my back",
+	"And I found hope in a heart attack",
+	"Oh, at last, it is past",
+	"Now I've got it, and you can't have it",
+	"Oh, baby, I am a wreck when I'm without you",
+	"I need you here to stay",
+	"I broke all my bones that day I found you",
+	"Crying at the lake",
+	"Was it something I said to make you feel like you're a burden? Oh",
+	"And if I could take it all back",
+	"I swear that I would pull you from the tide",
+	"Darling, when I'm fast asleep",
+	"I've seen this person watching me",
+	"Saying, \"Is it worth it? Is it worth it? Tell me, is it worth it?\"",
+	"'Cause there is something, and there is nothing",
+	"There is nothing in between",
+	"And in my eyes, there is a tiny dancer",
+	"Watching over me, he's singing",
+	"\"She's a, she's a lady, and I am just a boy\"",
+	"He's singing, \"She's a, she's a lady, and I am just a line without a hook\"",
+	"Oh, baby, I am a wreck when I'm without you",
+	"I need you here to stay",
+	"Broke all my bones that day I found you",
+	"Crying at the lake",
+	"Was it something I said to make you feel like you're a burden? Oh",
+	"And if I could take it all back",
+	"I swear that I would pull you from the tide"
+	],
+
+	b: [
+	"#7a642b",
+	"#5b491b",
+	"",
+	"I Thought I Saw Your Face Today",
+	"<3",
+	"I thought I saw your face today",
+	"But I just turned my head away",
+	"Your face against the trees",
+	"But I just see the memories as they come",
+	"As they come",
+	"And I couldn't help but fall in love again",
+	"No, I couldn't help but fall in love again",
+	"I saw it glitter as I grew",
+	"And loved it, boy, I never knew",
+	"I thought this place was heaven sent",
+	"But now it's just a monument in my mind",
+	"In my mind",
+	"And I couldn't help but fall in love again",
+	"No, I couldn't help but fall in love again",
+	"The cars and freeways implore me to stay",
+	"Away, out of this place",
+	"My mother said, \"Just keep your head",
+	"And play it as it lays\"",
+	"The cars and freeways implore me to stay",
+	"Away, out of this place",
+	"My mother said, \"Just keep your head",
+	"And play it as it lays\"",
+	"I somehow see what's beautiful",
+	"In things that are ephemeral",
+	"I'm my only friend of mine",
+	"And love is just a piece of time in the world",
+	"In the world",
+	"And I couldn't help but fall in love again",
+	"No, I couldn't help but fall in love again",
+	"No, I couldn't help but fall in love again",
+	"No, I couldn't help but fall in love again",
+	""
+	],
+	c: [
+	"#2e214f",
+	"#360b45",
+	"",
+	"Something About You",
+	"<3",
+	"In the car, Cruising around with you",
+	"And my baby, You know that I got you",
+	"Hit the road, I'm taking off with you",
+	"Not in a hurry, There's something about you, Ah",
+	"Leave the car, At the valet (Cash only)",
+	"Check me in, Pop the champagne (Dom Pérignon)",
+	"Pour me a glass, She's got good taste (So good)",
+	"Take off our clothes, By the fireplace (Sexy, yeah)",
+	"She looks just like a dream",
+	"The prettiest girl I've ever seen",
+	"From the cover of a magazine",
+	"In the car, Cruising around with you",
+	"And my baby, You know that I got you",
+	"Hit the road, I'm taking off with you",
+	"Not in a hurry, There's something about you, Ah",
+	"We stayed up all night and slept 'til noon",
+	"It's so nice to wake up next to you",
+	"Let's start the day with breakfast in bed",
+	"Think I'm gonna love you 'til I'm dead",
+	"I can't wait to buy you things",
+	"A brand new diamond ring",
+	"This is more than just a fling",
+	"In the car, Cruising around with you",
+	"And my baby, You know that I got you",
+	"Hit the road, I'm taking off with you",
+	"Not in a hurry, There's something about you, Ah",
+	"There's something about you, girl",
+	"There's something about you, Ah",
+	"Something about you",
+	"Something about"
+	],
+	d: [
+	"#6f0924",
+	"#9d3945",
+	"",
+	"Love Me Not",
+	"<3",
+	"See, right now, I need you, I'll meet you somewhere now",
+	"You up now, I see you, I get you, take care now",
+	"Slow down, be cool, I miss you, come here now",
+	"It's yours now, keep it, I'll hold out until now",
+	"I need you right now, once I leave you I'm strung out",
+	"If I get you, I'm slowly breaking down",
+	"And, oh, it's hard to see you, but I wish you were right here",
+	"Oh, it's hard to leave you when I get you everywhere",
+	"All this time I'm thinking we could never be a pair",
+	"Oh, no, I don't need you, but I miss you, come here",
+	"And, oh, it's hard to see you, but I wish you were right here",
+	"Oh, it's hard to leave you when I get you everywhere",
+	"All this time, I'm thinking I'm strong enough to sink it",
+	"Oh, no, I don't need you, but I miss you, come here",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"Soon as you leave me, we always lose connection",
+	"It's gettin' messy, I fiend for your affection",
+	"Don't loosen your grip, got a hold on me",
+	"Now, forever, let's get back together",
+	"Lord, take it so far away",
+	"I pray that, God, we don't break",
+	"I want you to take me up and down",
+	"And 'round and 'round again",
+	"And, oh, it's hard to see you, but I wish you were right here",
+	"Oh, it's hard to leave you when I get you everywhere",
+	"All this time I'm thinking we could never be a pair",
+	"Oh, no, I don't need you, but I miss you, come here",
+	"And, oh, it's hard to see you but I wish you were right here",
+	"Oh, it's hard to leave you when I get you everywhere",
+	"All this time, I'm thinking I'm strong enough to sink it",
+	"Oh, no, I don't need you, but I miss you, come here",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"He love me not, he loves me",
+	"He holds me tight then lets me go",
+	"You gotta say that you're sorry at the end of the night",
+	"Wake up in the morning, everything's alright",
+	"At the end of the story, you're holdin' me tight",
+	"I don't need to worry, am I out of my mind?",
+	"And, oh, it's hard to see you, but I wish you were right here (I'm losing my mind)",
+	"Oh, it's hard to leave you when I get you everywhere",
+	"All this time I'm thinking, I'm strong enough to sink it",
+	"Oh, no, I don't need you, but I miss you, come here"
+	],
+
+	 	}
+
+
+	 	const queryString = window.location.search;
+	 	const params = new URLSearchParams(queryString);
+	 	const p_val = params.get('song');
+
+	 	function render(){
+
+	 	const song = songs[p_val]
+
+        const first = document.querySelector("#first");
+	 	const second = document.querySelector("#second");
+	 	document.querySelector("nav").style.backgroundColor = song[0]
+	 	document.querySelector("body").style.backgroundColor = song[1]
+		let i = 2;
+	 	first.innerHTML = song[2]
+	 	second.innerHTML = song[3]
+
+	 	let isAnimating = false;
+
+	 	function playTransition(newFirst, newSecond){
+	 		if (isAnimating) return;
+	 		isAnimating = true;
+
+	 		first.classList.add("leaving");
+	 		second.classList.add("leaving");
+
+	 		setTimeout(function(){
+	 			first.innerHTML = newFirst;
+	 			second.innerHTML = newSecond;
+
+	 			first.classList.remove("leaving");
+	 			second.classList.remove("leaving");
+
+	 			// force reflow so the browser commits the class removal
+	 			// before "entering" is added, otherwise the delayed
+	 			// (staggered) second-line animation can visually stutter
+	 			void first.offsetWidth;
+	 			void second.offsetWidth;
+
+	 			first.classList.add("entering");
+	 			second.classList.add("entering");
+
+	 			setTimeout(function(){
+	 				first.classList.remove("entering");
+	 				second.classList.remove("entering");
+	 				isAnimating = false;
+	 			}, 440);
+	 		}, 150);
+	 	}
+
+	 	function forwards(){
+	 	if (i>=song.length-2) return;
+			i++
+			playTransition(song[i], song[i+1])
+	 	}
+	 	function backwards(){
+            if (i<=2) return;
+			i--
+			playTransition(song[i], song[i+1])
+	 	}
+
+window.forwards = forwards;
+window.backwards = backwards;
+	 	}
+render()
+
+
+	</script>
+</body>
+</html>
